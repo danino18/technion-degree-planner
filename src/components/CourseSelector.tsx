@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { courses } from '@/data/courses';
+import { t } from '@/i18n/hebrew';
 import './components.css';
 
 interface CourseSelectorProps {
@@ -29,12 +30,12 @@ export default function CourseSelector({
 
   return (
     <div className="course-selector">
-      <h3>Select Courses</h3>
+      <h3>{t('selectCourses')}</h3>
 
       <div className="course-selector-controls">
         <input
           type="text"
-          placeholder="Search courses..."
+          placeholder={t('searchCourses')}
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
           className="search-input"
@@ -45,10 +46,10 @@ export default function CourseSelector({
           onChange={e => setFilterType(e.target.value as any)}
           className="filter-select"
         >
-          <option value="all">All Types</option>
-          <option value="core">Core</option>
-          <option value="elective">Elective</option>
-          <option value="general">General</option>
+          <option value="all">{t('allTypes')}</option>
+          <option value="core">{t('core')}</option>
+          <option value="elective">{t('elective')}</option>
+          <option value="general">{t('general')}</option>
         </select>
       </div>
 

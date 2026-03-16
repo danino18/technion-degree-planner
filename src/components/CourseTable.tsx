@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { getCourseByCode } from '@/data/courses';
+import { t } from '@/i18n/hebrew';
 import { StudentCourseProgress } from '@/types/course';
 import './components.css';
 
@@ -31,11 +32,11 @@ export default function CourseTable({
       <table className="course-table">
         <thead>
           <tr>
-            <th>Code</th>
-            <th>Course Name</th>
-            <th>Credits</th>
-            <th>Type</th>
-            {showGrades && <th>Grade</th>}
+            <th>{t('courseCode')}</th>
+            <th>{t('courseName')}</th>
+            <th>{t('credits')}</th>
+            <th>{t('type')}</th>
+            {showGrades && <th>{t('grade')}</th>}
           </tr>
         </thead>
         <tbody>
