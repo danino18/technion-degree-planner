@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useStudentProgress } from '@/hooks/useStudentProgress';
 import { usePlanningAlgorithm } from '@/hooks/usePlanningAlgorithm';
+import { t } from '@/i18n/hebrew';
 import SemesterViewer from '@/components/SemesterViewer';
 import CourseSelector from '@/components/CourseSelector';
 import './components.css';
@@ -26,7 +27,7 @@ export default function PlannerView({ planId, programId }: PlannerViewProps) {
 
   const handleGeneratePlan = () => {
     if (selectedCourses.size === 0) {
-      alert('Please select at least one course');
+      alert(t('pleaseSelectCourse'));
       return;
     }
 
@@ -54,7 +55,7 @@ export default function PlannerView({ planId, programId }: PlannerViewProps) {
   };
 
   if (!progress) {
-    return <div className="loading">Loading planner...</div>;
+    return <div className="loading">{t('loadingPlanner')}</div>;
   }
 
   return (
@@ -67,14 +68,14 @@ export default function PlannerView({ planId, programId }: PlannerViewProps) {
             onRemoveCourse={handleRemoveCourse}
           />
           <button className="btn btn-large btn-primary" onClick={handleGeneratePlan}>
-            Generate Plan
+            {t('generatePlan')}
           </button>
         </div>
 
         <div className="planner-main">
           {plan && plan.length > 0 ? (
             <div>
-              <h3>Generated Study Plan</h3>
+              <h3>{t('generatedStudyPlan')}</h3>
               <div className="semesters-grid">
                 {plan.map(semester => (
                   <SemesterViewer
@@ -87,7 +88,7 @@ export default function PlannerView({ planId, programId }: PlannerViewProps) {
             </div>
           ) : (
             <div className="empty-state">
-              <p>Select courses and click "Generate Plan" to create your study schedule.</p>
+              <p>{t('selectCoursesHint')}</p>
             </div>
           )}
         </div>

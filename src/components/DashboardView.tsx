@@ -1,5 +1,6 @@
 import { useStudentProgress } from '@/hooks/useStudentProgress';
 import { useCourseLogic } from '@/hooks/useCourseLogic';
+import { t } from '@/i18n/hebrew';
 import ProgressBar from '@/components/ProgressBar';
 import GPADisplay from '@/components/GPADisplay';
 import SuggestedCourses from '@/components/SuggestedCourses';
@@ -17,7 +18,7 @@ export default function DashboardView({ planId, programId }: DashboardViewProps)
   const { calculateGPA, suggestNextCourses, getTotalCredits } = useCourseLogic();
 
   if (loading || !progress) {
-    return <div className="loading">Loading dashboard...</div>;
+    return <div className="loading">{t('loadingDashboard')}</div>;
   }
 
   const completedSet = new Set(Object.keys(progress.completedCourses));
@@ -42,26 +43,26 @@ export default function DashboardView({ planId, programId }: DashboardViewProps)
               className="plan-title-input"
             />
           </h2>
-          <p className="plan-semester">Semester {progress.currentSemester}</p>
+          <p className="plan-semester">{t('semester')} {progress.currentSemester}</p>
         </div>
       </div>
 
       <div className="dashboard-grid">
         {/* Main Progress */}
         <div className="dashboard-section">
-          <h3>Overall Progress</h3>
+          <h3>{t('overallProgress')}</h3>
           <ProgressBar
             completed={getTotalCredits(Array.from(completedSet))}
             total={157.5}
-            label="Credits"
+            label={t('credits')}
           />
           <div className="progress-stats">
             <div className="stat">
-              <span className="stat-label">Courses Completed:</span>
+              <span className="stat-label">{t('coursesCompleted')}</span>
               <span className="stat-value">{completedSet.size}</span>
             </div>
             <div className="stat">
-              <span className="stat-label">Credits Earned:</span>
+              <span className="stat-label">{t('creditsEarned')}</span>
               <span className="stat-value">{getTotalCredits(Array.from(completedSet))}</span>
             </div>
           </div>
@@ -69,32 +70,32 @@ export default function DashboardView({ planId, programId }: DashboardViewProps)
 
         {/* GPA */}
         <div className="dashboard-section">
-          <h3>Academic Performance</h3>
+          <h3>{t('academicPerformance')}</h3>
           <GPADisplay gpa={gpa} />
         </div>
 
         {/* First Year Progress */}
         <div className="dashboard-section">
-          <h3>First Year Fundamentals</h3>
+          <h3>{t('firstYearFundamentals')}</h3>
           <ProgressBar
             completed={firstYearCredits}
             total={31}
-            label="Foundation courses"
+            label={t('credits')}
           />
         </div>
       </div>
 
       {/* Suggested Courses */}
       <div className="dashboard-section full-width">
-        <h3>Suggested Next Courses</h3>
+        <h3>{t('suggestedNextCourses')}</h3>
         <SuggestedCourses courses={suggestedCourses} onSelectCourse={() => {}} />
       </div>
 
       {/* Completed Courses */}
       <div className="dashboard-section full-width">
-        <h3>Completed Courses</h3>
+        <h3>{t('completedCourses')}</h3>
         {completedSet.size === 0 ? (
-          <p className="no-data">No courses completed yet.</p>
+          <p className="no-data">{t('noCoursesCompleted')}</p>
         ) : (
           <CourseTable
             courseCodes={Array.from(completedSet)}

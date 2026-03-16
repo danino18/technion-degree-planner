@@ -60,6 +60,7 @@ export const hebrewTranslations = {
   
   // Planner
   selectCourses: "בחר קורסים",
+  selectCoursesHint: "בחר קורסים ולחץ על 'יצור תוכנית' כדי ליצור את לוח הזמנים שלך.",
   generatePlan: "יצור תוכנית",
   generatedStudyPlan: "תוכנית הלימוד שנוצרה",
   pleaseSelectCourse: "אנא בחר לפחות קורס אחד",
