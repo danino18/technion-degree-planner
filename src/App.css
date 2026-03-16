@@ -6,11 +6,22 @@
   box-sizing: border-box;
 }
 
+html {
+  direction: rtl;
+  text-align: right;
+}
+
+body {
+  direction: rtl;
+  text-align: right;
+}
+
 .app {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   flex-direction: column;
+  direction: rtl;
 }
 
 .app-header {
@@ -25,11 +36,14 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  direction: rtl;
+  text-align: center;
 }
 
 .app-header p {
   font-size: 1.1rem;
   opacity: 0.9;
+  direction: rtl;
 }
 
 .app-nav {
@@ -39,6 +53,8 @@
   padding: 1rem;
   flex-wrap: wrap;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  justify-content: flex-start;
+  direction: rtl;
 }
 
 .nav-button {
@@ -50,6 +66,8 @@
   border-radius: 6px;
   font-weight: 500;
   transition: all 0.3s ease;
+  direction: rtl;
+  white-space: nowrap;
 }
 
 .nav-button:hover {
@@ -69,6 +87,7 @@
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+  direction: rtl;
 }
 
 @media (max-width: 768px) {

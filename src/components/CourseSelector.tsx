@@ -19,8 +19,8 @@ export default function CourseSelector({
   const filtered = courses.filter(course => {
     const matchesSearch =
       course.code.includes(searchTerm) ||
-      course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (course.nameHebrew && course.nameHebrew.includes(searchTerm));
+      (course.name && course.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      course.nameHebrew.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesType = filterType === 'all' || course.type === filterType;
 

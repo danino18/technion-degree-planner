@@ -100,7 +100,7 @@ export function useCourseLogic() {
           if (typeOrder[a.type] !== typeOrder[b.type]) {
             return typeOrder[a.type] - typeOrder[b.type];
           }
-          return a.name.localeCompare(b.name);
+          return a.nameHebrew.localeCompare(b.nameHebrew);
         })
         .slice(0, limit);
     },

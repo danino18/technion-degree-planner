@@ -8,11 +8,12 @@ import './components.css';
 
 interface DashboardViewProps {
   planId: string;
+  programId: string;
 }
 
-export default function DashboardView({ planId }: DashboardViewProps) {
+export default function DashboardView({ planId, programId }: DashboardViewProps) {
   const { progress, loading, markCourseCompleted, updatePlanName } =
-    useStudentProgress(planId);
+    useStudentProgress(planId, programId);
   const { calculateGPA, suggestNextCourses, getTotalCredits } = useCourseLogic();
 
   if (loading || !progress) {

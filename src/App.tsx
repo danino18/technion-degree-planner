@@ -3,12 +3,20 @@ import './App.css';
 import PlanSelector from '@/components/PlanSelector';
 import DashboardView from '@/components/DashboardView';
 import PlannerView from '@/components/PlannerView';
+import DegreeSelector from '@/components/DegreeSelector';
+import { t } from '@/i18n/hebrew';
 
-type ViewMode = 'plans' | 'dashboard' | 'planner';
+type ViewMode = 'program-select' | 'plans' | 'dashboard' | 'planner';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<ViewMode>('plans');
+  const [currentView, setCurrentView] = useState<ViewMode>('program-select');
   const [activePlanId, setActivePlanId] = useState<string | null>(null);
+  const [selectedProgram, setSelectedProgram] = useState<string | null>('ee');
+
+  const handleSelectProgram = (programId: string) => {
+    setSelectedProgram(programId);
+    setCurrentView('plans');
+  };
 
   const handleSelectPlan = (planId: string) => {
     setActivePlanId(planId);
@@ -21,52 +29,71 @@ export default function App() {
     setCurrentView('dashboard');
   };
 
+  const handleBackToPrograms = () => {
+    setCurrentView('program-select');
+    setSelectedProgram(null);
+    setActivePlanId(null);
+  };
+
   return (
-    <div className="app">
+    <div className="app" dir="rtl">
       <header className="app-header">
-        <h1>🎓 Technion Degree Planner</h1>
-        <p>Electrical Engineering B.Sc.</p>
+        <h1>🎓 {t('appTitle')}</h1>
+        <p>{t('appSubtitle')}</p>
       </header>
 
-      <nav className="app-nav">
-        <button
-          className={`nav-button ${currentView === 'plans' ? 'active' : ''}`}
-          onClick={() => setCurrentView('plans')}
-        >
-          My Plans
-        </button>
-        {activePlanId && (
-          <>
+      {currentView !== 'program-select' && (
+        <nav className="app-nav">
+          <button className="nav-button" onClick={handleBackToPrograms}>
+            ← {t('degreePrograms')}
+          </button>
+          {selectedProgram && (
             <button
-              className={`nav-button ${currentView === 'dashboard' ? 'active' : ''}`}
-              onClick={() => setCurrentView('dashboard')}
+              className={`nav-button ${currentView === 'plans' ? 'active' : ''}`}
+              onClick={() => setCurrentView('plans')}
             >
-              Dashboard
+              {t('myPlans')}
             </button>
-            <button
-              className={`nav-button ${currentView === 'planner' ? 'active' : ''}`}
-              onClick={() => setCurrentView('planner')}
-            >
-              Plan Builder
-            </button>
-          </>
-        )}
-      </nav>
+          )}
+          {activePlanId && (
+            <>
+              <button
+                className={`nav-button ${currentView === 'dashboard' ? 'active' : ''}`}
+                onClick={() => setCurrentView('dashboard')}
+              >
+                {t('dashboard')}
+              </button>
+              <button
+                className={`nav-button ${currentView === 'planner' ? 'active' : ''}`}
+                onClick={() => setCurrentView('planner')}
+              >
+                {t('planBuilder')}
+              </button>
+            </>
+          )}
+        </nav>
+      )}
 
       <main className="app-main">
-        {currentView === 'plans' && (
+        {currentView === 'program-select' && (
+          <DegreeSelector onSelectProgram={handleSelectProgram} />
+        )}
+
+        {currentView === 'plans' && selectedProgram && (
           <PlanSelector
+            programId={selectedProgram}
             onSelectPlan={handleSelectPlan}
             onCreateNew={handleCreateNewPlan}
+            onBack={handleBackToPrograms}
           />
         )}
 
-        {currentView === 'dashboard' && activePlanId && (
-          <DashboardView planId={activePlanId} />
+        {currentView === 'dashboard' && activePlanId && selectedProgram && (
+          <DashboardView planId={activePlanId} programId={selectedProgram} />
         )}
 
-        {currentView === 'planner' && activePlanId && (
-          <PlannerView planId={activePlanId} />
+        {currentView === 'planner' && activePlanId && selectedProgram && (
+          <PlannerView planId={activePlanId} programId={selectedProgram} />
         )}
       </main>
     </div>

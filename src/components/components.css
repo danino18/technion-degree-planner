@@ -1,5 +1,106 @@
 /* Components CSS */
 
+/* RTL Support */
+* {
+  direction: rtl;
+  text-align: right;
+}
+
+input,
+textarea,
+select {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== Degree Selector ===== */
+.degree-selector {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.degree-selector h2 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+.degree-selector-subtitle {
+  color: #95a5a6;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.degree-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.degree-card {
+  background: white;
+  border: 2px solid #ecf0f1;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  text-align: right;
+}
+
+.degree-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+  transform: translateY(-4px);
+}
+
+.degree-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.degree-english-name {
+  color: #95a5a6;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+.degree-description {
+  color: #34495e;
+  margin: 1rem 0 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.degree-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+.degree-credits {
+  background: #e8f4f8;
+  color: #2980b9;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.degree-core {
+  background: #e8f8f5;
+  color: #27ae60;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
 /* ===== General Button Styles ===== */
 .btn {
   padding: 0.75rem 1.5rem;

@@ -1,46 +1,57 @@
 import { useStudentPlans } from '@/hooks/useStudentProgress';
+import { t } from '@/i18n/hebrew';
 import './components.css';
 
 interface PlanSelectorProps {
+  programId: string;
   onSelectPlan: (planId: string) => void;
   onCreateNew: () => void;
+  onBack: () => void;
 }
 
-export default function PlanSelector({ onSelectPlan, onCreateNew }: PlanSelectorProps) {
+export default function PlanSelector({ programId, onSelectPlan, onCreateNew, onBack }: PlanSelectorProps) {
   const { plans, loading, deletePlan } = useStudentPlans();
+  
+  // Filter plans for the selected program
+  const filteredPlans = plans.filter(plan => plan.programId === programId);
 
   return (
     <div className="plan-selector">
-      <h2>My Study Plans</h2>
+      <div className="view-header">
+        <button className="btn btn-back" onClick={onBack}>
+          ← {t('back')}
+        </button>
+        <h2>{t('myStudyPlans')}</h2>
+      </div>
 
-      {loading && <div className="loading">Loading plans...</div>}
+      {loading && <div className="loading">{t('loadingPlans')}</div>}
 
-      {!loading && plans.length === 0 && (
+      {!loading && filteredPlans.length === 0 && (
         <div className="empty-state">
-          <p>No study plans yet. Create one to get started!</p>
+          <p>{t('noPlansYet')}</p>
         </div>
       )}
 
-      {!loading && plans.length > 0 && (
+      {!loading && filteredPlans.length > 0 && (
         <div className="plans-grid">
-          {plans.map(plan => (
+          {filteredPlans.map(plan => (
             <div key={plan.planId} className="plan-card">
               <h3>{plan.name}</h3>
               <p className="plan-date">
-                Last updated: {new Date(plan.lastUpdated).toLocaleDateString()}
+                {t('lastUpdated')}: {new Date(plan.lastUpdated).toLocaleDateString('he-IL')}
               </p>
               <div className="plan-actions">
                 <button
                   className="btn btn-primary"
                   onClick={() => onSelectPlan(plan.planId)}
                 >
-                  Open Plan
+                  {t('openPlan')}
                 </button>
                 <button
                   className="btn btn-danger"
                   onClick={() => deletePlan(plan.planId)}
                 >
-                  Delete
+                  {t('delete')}
                 </button>
               </div>
             </div>
@@ -49,7 +60,7 @@ export default function PlanSelector({ onSelectPlan, onCreateNew }: PlanSelector
       )}
 
       <button className="btn btn-large btn-success" onClick={onCreateNew}>
-        + Create New Plan
+        + {t('createNewPlan')}
       </button>
     </div>
   );

@@ -4,8 +4,8 @@
 
 export interface Course {
   code: string;                    // "00440105"
-  name: string;                    // "Electric Circuits"
-  nameHebrew?: string;             // "תיאוריית המעגלים"
+  nameHebrew: string;              // "תיאוריית המעגלים"
+  name?: string;                   // "Electric Circuits" (optional English fallback)
   credits: number;                 // 4.0
   type: 'core' | 'elective' | 'general';
   lectureHours: number;            // 3
@@ -14,15 +14,29 @@ export interface Course {
   semester?: number;               // 1-8 (recommended semester)
   specializations?: string[];      // ["control", "electromagnetics"]
   description?: string;
+  descriptionHebrew?: string;
 }
 
 export interface Specialization {
   id: string;                      // "networks"
-  name: string;                    // "Computer Networks"
-  nameHebrew?: string;
+  nameHebrew: string;              // "רשתות מחשבים"
+  name?: string;                   // "Computer Networks" (optional)
   minCourses: number;              // typically 3
   minCredits?: number;             // minimum credits required
   courses: string[];               // array of course codes
+}
+
+export interface DegreeProgram {
+  id: string;                      // "ee" for Electrical Engineering
+  nameHebrew: string;              // "הנדסת חשמל"
+  name?: string;                   // English name
+  totalCredits: number;            // 157.5
+  coreCourses: string[];           // required course codes
+  coreCredits: number;             // e.g., 106
+  electiveMinCredits: number;      // e.g., 39.5
+  generalMinCredits: number;       // e.g., 12
+  specializations: Specialization[];
+  description?: string;
 }
 
 export interface DegreeRequirements {
@@ -44,6 +58,7 @@ export interface StudentCourseProgress {
 
 export interface StudentProgress {
   planId: string;                  // unique plan identifier
+  programId: string;               // degree program ID (e.g., "ee", "cs")
   name: string;                    // "Plan A - 2024"
   completedCourses: Record<string, StudentCourseProgress>;
   currentSemester: number;

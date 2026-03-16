@@ -7,11 +7,12 @@ import './components.css';
 
 interface PlannerViewProps {
   planId: string;
+  programId: string;
 }
 
-export default function PlannerView({ planId }: PlannerViewProps) {
+export default function PlannerView({ planId, programId }: PlannerViewProps) {
   const { progress, updatePlannedSemesters } =
-    useStudentProgress(planId);
+    useStudentProgress(planId, programId);
   const { generateSemesterPlan, validatePlan } = usePlanningAlgorithm();
 
   const [selectedCourses, setSelectedCourses] = useState<Set<string>>(new Set());

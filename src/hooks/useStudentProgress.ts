@@ -9,7 +9,7 @@ import { StudentProgress, SemesterPlan } from '@/types/course';
 const STORAGE_KEY_PREFIX = 'technion_planner_';
 const PLANS_INDEX_KEY = 'technion_planner_plans_index';
 
-export function useStudentProgress(planId: string) {
+export function useStudentProgress(planId: string, programId: string) {
   const [progress, setProgress] = useState<StudentProgress | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,6 +26,7 @@ export function useStudentProgress(planId: string) {
         // Create new plan if doesn't exist
         const newPlan: StudentProgress = {
           planId,
+          programId,
           name: `Study Plan ${new Date().toLocaleDateString()}`,
           completedCourses: {},
           currentSemester: 1,
@@ -41,7 +42,7 @@ export function useStudentProgress(planId: string) {
       setError(err instanceof Error ? err.message : 'Failed to load progress');
       setLoading(false);
     }
-  }, [planId]);
+  }, [planId, programId]);
 
   const savePlan = useCallback((planData: StudentProgress) => {
     try {
@@ -64,12 +65,14 @@ export function useStudentProgress(planId: string) {
       if (existingIndex >= 0) {
         index[existingIndex] = {
           planId: plan.planId,
+          programId: plan.programId,
           name: plan.name,
           lastUpdated: plan.lastUpdated,
         };
       } else {
         index.push({
           planId: plan.planId,
+          programId: plan.programId,
           name: plan.name,
           lastUpdated: plan.lastUpdated,
         });
@@ -165,7 +168,7 @@ export function useStudentProgress(planId: string) {
  * Hook to get all saved plans
  */
 export function useStudentPlans() {
-  const [plans, setPlans] = useState<Array<{ planId: string; name: string; lastUpdated: string }>>([]);
+  const [plans, setPlans] = useState<Array<{ planId: string; programId: string; name: string; lastUpdated: string }>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
