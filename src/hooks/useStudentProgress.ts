@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { StudentProgress, SemesterPlan, StudentCourseProgress } from '@/types/course';
+import { StudentProgress, SemesterPlan } from '@/types/course';
 
 const STORAGE_KEY_PREFIX = 'technion_planner_';
 const PLANS_INDEX_KEY = 'technion_planner_plans_index';

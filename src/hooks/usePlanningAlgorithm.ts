@@ -24,7 +24,7 @@ export function usePlanningAlgorithm() {
   const generateSemesterPlan = useCallback(
     (
       interestedCourses: string[],
-      selectedSpecializations: string[],
+      _selectedSpecializations: string[],
       preferredCreditsPerSem: number = 24
     ): SemesterPlan[] => {
       const plan: SemesterPlan[] = [];

@@ -1,5 +1,6 @@
 import { SemesterPlan, StudentProgress } from '@/types/course';
 import { getCourseByCode } from '@/data/courses';
+import { Course } from '@/types/course';
 import './components.css';
 
 interface SemesterViewerProps {
@@ -10,7 +11,7 @@ interface SemesterViewerProps {
 export default function SemesterViewer({ semester, progress }: SemesterViewerProps) {
   const courses = semester.courses
     .map(code => getCourseByCode(code))
-    .filter((c): c is typeof c => c !== null);
+    .filter((c): c is Course => c !== undefined);
 
   return (
     <div className="semester-card">

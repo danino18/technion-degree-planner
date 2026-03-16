@@ -53,7 +53,7 @@ export interface DegreeProgress {
   canGraduate: boolean;
 }
 
-export function calculateDegreeProgress(completedCourses: Record<string, any>): DegreeProgress {
+export function calculateDegreeProgress(_completedCourses: Record<string, any>): DegreeProgress {
   // TODO: Implement full progress calculation
   // For now, placeholder
   return {
