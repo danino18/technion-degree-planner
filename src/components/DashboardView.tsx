@@ -1,7 +1,5 @@
-import React from 'react';
 import { useStudentProgress } from '@/hooks/useStudentProgress';
 import { useCourseLogic } from '@/hooks/useCourseLogic';
-import { getCourseByCode } from '@/data/courses';
 import ProgressBar from '@/components/ProgressBar';
 import GPADisplay from '@/components/GPADisplay';
 import SuggestedCourses from '@/components/SuggestedCourses';
@@ -13,7 +11,7 @@ interface DashboardViewProps {
 }
 
 export default function DashboardView({ planId }: DashboardViewProps) {
-  const { progress, loading, markCourseCompleted, markCourseIncomplete, updatePlanName } =
+  const { progress, loading, markCourseCompleted, updatePlanName } =
     useStudentProgress(planId);
   const { calculateGPA, suggestNextCourses, getTotalCredits } = useCourseLogic();
 

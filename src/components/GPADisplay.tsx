@@ -1,4 +1,3 @@
-import React from 'react';
 import { GPA } from '@/types/course';
 import './components.css';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { SemesterPlan, StudentProgress } from '@/types/course';
 import { getCourseByCode } from '@/data/courses';
 import './components.css';

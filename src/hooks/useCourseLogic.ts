@@ -3,7 +3,7 @@
  * Prerequisites, next course suggestions, GPA calculations, etc.
  */
 
-import { useMemo, useCallback } from 'react';
+import { useCallback } from 'react';
 import { Course, GPA } from '@/types/course';
 import { courses, getCourseByCode } from '@/data/courses';
 import { prerequisites, arePrerequisitesMet } from '@/data/prerequisites';

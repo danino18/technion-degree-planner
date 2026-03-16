@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useStudentProgress } from '@/hooks/useStudentProgress';
-import { useCourseLogic } from '@/hooks/useCourseLogic';
 import { usePlanningAlgorithm } from '@/hooks/usePlanningAlgorithm';
-import { courses } from '@/data/courses';
 import SemesterViewer from '@/components/SemesterViewer';
 import CourseSelector from '@/components/CourseSelector';
 import './components.css';
@@ -12,9 +10,8 @@ interface PlannerViewProps {
 }
 
 export default function PlannerView({ planId }: PlannerViewProps) {
-  const { progress, updatePlannedSemesters, updateSpecializations } =
+  const { progress, updatePlannedSemesters } =
     useStudentProgress(planId);
-  const { suggestNextCourses } = useCourseLogic();
   const { generateSemesterPlan, validatePlan } = usePlanningAlgorithm();
 
   const [selectedCourses, setSelectedCourses] = useState<Set<string>>(new Set());

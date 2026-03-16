@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { courses } from '@/data/courses';
 import './components.css';
 

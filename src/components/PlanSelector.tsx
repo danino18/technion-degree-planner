@@ -1,4 +1,3 @@
-import React from 'react';
 import { useStudentPlans } from '@/hooks/useStudentProgress';
 import './components.css';
 

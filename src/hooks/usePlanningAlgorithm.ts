@@ -4,7 +4,7 @@
  */
 
 import { useCallback } from 'react';
-import { Course, SemesterPlan, Specialization } from '@/types/course';
+import { Course, SemesterPlan } from '@/types/course';
 import { courses, getCourseByCode } from '@/data/courses';
 import { prerequisites } from '@/data/prerequisites';
 

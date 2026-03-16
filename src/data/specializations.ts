@@ -127,7 +127,7 @@ export const specializations: Specialization[] = [
   {
     id: "research",
     name: "Research and Excellence Track",
-    nameHebrave: "מסלול מחקר",
+    nameHebrew: "מסלול מחקר",
     minCourses: 3,
     minCredits: 9,
     courses: [

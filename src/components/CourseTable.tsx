@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { getCourseByCode } from '@/data/courses';
 import { StudentCourseProgress } from '@/types/course';
 import './components.css';
